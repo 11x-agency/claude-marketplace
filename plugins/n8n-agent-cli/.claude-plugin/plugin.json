@@ -5,7 +5,7 @@
   "author": {
     "name": "Robin Sadeghpour"
   },
-  "repository": "https://github.com/11x-agency/n8n-agent-cli-plugin",
+  "repository": "https://github.com/11x-agency/claude-marketplace",
   "license": "MIT",
   "keywords": ["n8n", "cli", "automation", "workflow", "ai-agent"]
 }

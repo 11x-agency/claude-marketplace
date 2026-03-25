@@ -1,12 +1,12 @@
 {
-  "name": "n8n-agent-cli-marketplace",
+  "name": "11x-marketplace",
   "owner": {
-    "name": "Robin Sadeghpour"
+    "name": "11x Agency"
   },
   "plugins": [
     {
       "name": "n8n-agent-cli",
-      "source": ".",
+      "source": "./plugins/n8n-agent-cli",
       "description": "Manage n8n workflows, executions, variables, and tags via the n8n-agent-cli",
       "version": "1.0.0"
     }

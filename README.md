@@ -1,39 +1,24 @@
-# n8n-agent-cli plugin for Claude Code
+# 11x Agency — Claude Code Marketplace
 
-A Claude Code plugin that teaches Claude how to use [n8n-agent-cli](https://github.com/robinsadeghpour/n8n-cli) to manage your n8n instance.
-
-## Prerequisites
-
-Install the CLI first:
-
-```bash
-npm install -g n8n-agent-cli
-```
-
-Set your n8n credentials:
-
-```bash
-export N8N_BASE_URL="https://your-n8n-instance.com"
-export N8N_API_KEY="your-api-key"
-```
+A collection of Claude Code plugins by [11x Agency](https://github.com/11x-agency).
 
 ## Install
 
 ```
-/plugin marketplace add 11x-agency/n8n-agent-cli-plugin
-/plugin install n8n-agent-cli
+/plugin marketplace add 11x-agency/claude-marketplace
 ```
 
-## What it does
+## Available Plugins
 
-The plugin gives Claude knowledge of all n8n-agent-cli commands so it can:
+### n8n-agent-cli
 
-- List, create, update, and delete workflows
-- Debug failed executions and retry them
-- Manage variables and tags
-- Check API connectivity
+Teaches Claude how to use [n8n-agent-cli](https://github.com/robinsadeghpour/n8n-cli) to manage your n8n instance — workflows, executions, variables, and tags.
 
-The skill triggers automatically whenever you mention n8n, workflows, executions, or automations.
+```
+/plugin install n8n-agent-cli@11x-marketplace
+```
+
+**Prerequisites:** `npm install -g n8n-agent-cli` and set `N8N_BASE_URL` / `N8N_API_KEY` env vars.
 
 ## License
 
