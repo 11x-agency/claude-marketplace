@@ -1,0 +1,11 @@
+{
+  "name": "n8n-agent-cli",
+  "description": "Manage n8n workflows, executions, variables, and tags via the n8n-agent-cli",
+  "version": "1.0.0",
+  "author": {
+    "name": "Robin Sadeghpour"
+  },
+  "repository": "https://github.com/11x-agency/n8n-agent-cli-plugin",
+  "license": "MIT",
+  "keywords": ["n8n", "cli", "automation", "workflow", "ai-agent"]
+}

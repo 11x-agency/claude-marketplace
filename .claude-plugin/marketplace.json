@@ -1,0 +1,14 @@
+{
+  "name": "n8n-agent-cli-marketplace",
+  "owner": {
+    "name": "Robin Sadeghpour"
+  },
+  "plugins": [
+    {
+      "name": "n8n-agent-cli",
+      "source": ".",
+      "description": "Manage n8n workflows, executions, variables, and tags via the n8n-agent-cli",
+      "version": "1.0.0"
+    }
+  ]
+}
