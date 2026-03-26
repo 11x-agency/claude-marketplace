@@ -34,3 +34,8 @@ export N8N_API_KEY="your-api-key"
 /plugin marketplace add 11x-agency/claude-marketplace
 /plugin install n8n-agent-cli@11x-marketplace
 ```
+
+## Links
+
+- [n8n-agent-cli on GitHub](https://github.com/robinsadeghpour/n8n-cli) — source code, full docs, and CLI reference
+- [n8n-agent-cli on npm](https://www.npmjs.com/package/n8n-agent-cli)
