@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{DOCUMENT_TITLE}}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #FAFAFA;
+      --surface: #FFFFFF;
+      --surface-alt: #F4F4F5;
+      --foreground: #0A0A0A;
+      --text-secondary: #545454;
+      --text-muted: #888888;
+      --border: #DBDBDB;
+      --border-subtle: #E8E8E8;
+      --gradient-rgb: linear-gradient(90deg, #33090F 0%, #C93B32 13%, #F8863A 25%, #C8D47A 38%, #6A8E50 50%, #002211 62%, #001A3D 74%, #3B7FCC 86%, #99CCFF 97%);
+      --font-serif: 'Cormorant Garamond', serif;
+      --font-sans: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    @page { size: A4; margin: 0; }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #fff;
+      color: var(--foreground);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      line-height: 1.7;
+      font-size: 14px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ---- Page template ---- */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: var(--background);
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    .page-gradient {
+      height: 4px;
+      background: var(--gradient-rgb);
+      flex-shrink: 0;
+    }
+
+    .page-content {
+      flex: 1;
+      padding: 48px 56px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-footer {
+      padding: 0 56px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .page-footer-logo {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+    }
+
+    .page-footer-logo .bracket { color: var(--border); }
+
+    .page-footer-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* ---- Typography ---- */
+    .section-prefix {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: 3.2rem;
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: 2rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    .lead {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    /* ---- Logo ---- */
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      margin-bottom: 48px;
+    }
+    .logo .bracket { color: var(--text-muted); }
+
+    /* ---- Meta info ---- */
+    .meta {
+      display: flex;
+      gap: 40px;
+      margin: 28px 0;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .meta-value {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--foreground);
+      font-weight: 400;
+    }
+
+    /* ---- Divider ---- */
+    .divider {
+      height: 4px;
+      background: var(--gradient-rgb);
+      margin: 32px 0;
+      border: none;
+    }
+
+    /* ---- Card grid (2 columns) ---- */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+      margin: 20px 0;
+    }
+
+    .card {
+      background: var(--background);
+      padding: 24px;
+    }
+
+    .card .card-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .card h3 { margin-bottom: 6px; }
+    .card p { font-size: 13px; margin-bottom: 0; }
+
+    /* ---- Status grid (3 columns) ---- */
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+      margin: 20px 0;
+    }
+
+    .status-card {
+      background: var(--background);
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin: 0 auto 12px;
+    }
+
+    .status-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+    .status-card p { font-size: 12px; margin-bottom: 0; }
+
+    /* ---- Flow steps ---- */
+    .flow {
+      margin: 20px 0;
+      padding: 28px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .flow-step:last-child { margin-bottom: 0; }
+
+    .flow-step::before {
+      content: '';
+      position: absolute;
+      left: 14px;
+      top: 30px;
+      bottom: -22px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .flow-step:last-child::before { display: none; }
+
+    .flow-number {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      min-width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .flow-content h3 { font-size: 1.05rem; margin-bottom: 3px; }
+    .flow-content p { font-size: 13px; margin-bottom: 0; }
+
+    /* ---- Questions list ---- */
+    .questions {
+      list-style: none;
+      margin: 16px 0;
+      counter-reset: q;
+    }
+
+    .questions li {
+      counter-increment: q;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      gap: 14px;
+      align-items: baseline;
+    }
+
+    .questions li:last-child { border-bottom: none; }
+
+    .questions li::before {
+      content: "[ 0" counter(q) " ]";
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+
+    .questions li span { color: var(--text-secondary); font-size: 13px; }
+    .questions li strong { color: var(--foreground); font-weight: 400; }
+
+    /* ---- Pills ---- */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+    }
+
+    /* ---- Utilities ---- */
+    .spacer { flex: 1; }
+    .spacer-sm { height: 24px; flex-shrink: 0; }
+    .spacer-md { height: 40px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- PAGE 1: Cover -->
+<div class="page">
+  <div class="page-gradient"></div>
+  <div class="page-content">
+    <div class="logo">
+      <span class="bracket">[</span> 11x Agency <span class="bracket">]</span>
+    </div>
+
+    <div class="section-prefix">// {{DOCUMENT_TYPE}}</div>
+    <h1>{{TITLE}}</h1>
+    <p class="lead">{{LEAD_TEXT}}</p>
+
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">Client</span>
+        <span class="meta-value">{{CLIENT}}</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Date</span>
+        <span class="meta-value">{{DATE}}</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Scope</span>
+        <span class="meta-value">{{SCOPE}}</span>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- First section starts here on the cover page -->
+    <div class="section-prefix">// 01 {{SECTION_NAME}}</div>
+    <h2>{{Section heading}}</h2>
+    <p>{{Section content}}</p>
+
+    <div class="spacer"></div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-logo"><span class="bracket">[</span> 11x Agency <span class="bracket">]</span></div>
+    <div class="page-footer-num">1 / {{TOTAL_PAGES}}</div>
+  </div>
+</div>
+
+<!-- PAGE 2+: Content pages -->
+<div class="page">
+  <div class="page-gradient"></div>
+  <div class="page-content">
+
+    <!-- Sections go here. Use <hr class="divider"> between sections on the same page. -->
+
+    <div class="spacer"></div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-logo"><span class="bracket">[</span> 11x Agency <span class="bracket">]</span></div>
+    <div class="page-footer-num">2 / {{TOTAL_PAGES}}</div>
+  </div>
+</div>
+
+</body>
+</html>

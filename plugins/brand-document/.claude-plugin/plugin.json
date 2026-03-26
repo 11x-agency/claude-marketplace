@@ -1,0 +1,11 @@
+{
+  "name": "brand-document",
+  "description": "Generate on-brand PDF documents (proposals, reports, case studies) using the 11x Agency design language with fixed A4 page templates",
+  "version": "1.0.0",
+  "author": {
+    "name": "Robin Sadeghpour"
+  },
+  "repository": "https://github.com/11x-agency/claude-marketplace",
+  "license": "MIT",
+  "keywords": ["pdf", "document", "proposal", "brand", "design", "report", "case-study"]
+}

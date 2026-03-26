@@ -15,6 +15,12 @@
       "source": "./plugins/n8n-evals",
       "description": "Guide for setting up n8n's native evaluation framework to test AI workflows — evaluation triggers, test datasets, scoring metrics, and regression tests",
       "version": "1.0.0"
+    },
+    {
+      "name": "brand-document",
+      "source": "./plugins/brand-document",
+      "description": "Generate on-brand PDF documents (proposals, reports, case studies) using the 11x Agency design language with fixed A4 page templates",
+      "version": "1.0.0"
     }
   ]
 }
