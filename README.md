@@ -1,24 +1,67 @@
-# 11x Agency — Claude Code Marketplace
+# 11x Claude Plugins
 
-A collection of Claude Code plugins by [11x Agency](https://github.com/11x-agency).
+A [Claude Code plugin marketplace](https://docs.anthropic.com/en/docs/claude-code) by **[11x Agency](https://11x.agency)** — AI-powered automation tools.
+
+## Plugins
+
+| Plugin | Description | Invoke |
+|--------|-------------|--------|
+| **n8n-agent-cli** | Manage n8n workflows, executions, variables, and tags via the n8n-agent-cli | `/n8n-agent-cli` |
 
 ## Install
+
+Add the marketplace to Claude Code:
 
 ```
 /plugin marketplace add 11x-agency/claude-marketplace
 ```
 
-## Available Plugins
+Then enable the plugins you want. They'll be available as slash commands in any project.
 
-### n8n-agent-cli
+## Project Setup
 
-Teaches Claude how to use [n8n-agent-cli](https://github.com/robinsadeghpour/n8n-cli) to manage your n8n instance — workflows, executions, variables, and tags.
+To auto-enable plugins for a specific project, add to `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "11x-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "11x-agency/claude-marketplace"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "n8n-agent-cli@11x-marketplace": true
+  }
+}
+```
+
+## Structure
 
 ```
-/plugin install n8n-agent-cli@11x-marketplace
+.claude-plugin/
+  marketplace.json        # Plugin catalog
+plugins/
+  n8n-agent-cli/
+    .claude-plugin/
+      plugin.json
+    skills/
+      n8n-agent-cli/
+        SKILL.md
+    README.md
 ```
 
-**Prerequisites:** `npm install -g n8n-agent-cli` and set `N8N_BASE_URL` / `N8N_API_KEY` env vars.
+## Contributing
+
+Each plugin lives in `plugins/<name>/`. To add a new plugin:
+
+1. Create `plugins/<name>/.claude-plugin/plugin.json`
+2. Add your skill at `plugins/<name>/skills/<name>/SKILL.md`
+3. Add a `README.md` to `plugins/<name>/`
+4. Register it in `.claude-plugin/marketplace.json`
+5. Bump the version in both `plugin.json` and `marketplace.json`
 
 ## License
 
