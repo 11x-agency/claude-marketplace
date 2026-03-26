@@ -5,9 +5,17 @@ description: Manage n8n workflows, executions, variables, and tags via the n8n-a
 
 # n8n-agent-cli
 
-A lightweight CLI for the n8n REST API. Use it instead of the n8n MCP server when you need fast, low-overhead n8n operations.
+A lightweight CLI for the n8n REST API ([npm](https://www.npmjs.com/package/@11x.agency/n8n-cli) | [GitHub](https://github.com/robinsadeghpour/n8n-cli)). Use it instead of the n8n MCP server when you need fast, low-overhead n8n operations.
 
 ## Prerequisites
+
+Install globally or run via npx:
+
+```bash
+npm install -g @11x.agency/n8n-cli
+# or use directly
+npx @11x.agency/n8n-cli <command>
+```
 
 The CLI needs two environment variables. Check they're set before running commands — if either is missing, the CLI exits with code 2:
 

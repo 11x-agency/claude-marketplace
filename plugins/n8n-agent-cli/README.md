@@ -1,10 +1,10 @@
 # n8n-agent-cli
 
-A Claude Code plugin that teaches Claude how to use [n8n-agent-cli](https://github.com/robinsadeghpour/n8n-cli) to manage your n8n instance.
+A Claude Code plugin that teaches Claude how to use [@11x.agency/n8n-cli](https://github.com/robinsadeghpour/n8n-cli) to manage your n8n instance.
 
 ## What it does
 
-The plugin gives Claude knowledge of all n8n-agent-cli commands so it can:
+The plugin gives Claude knowledge of all n8n-cli commands so it can:
 
 - List, create, update, and delete workflows
 - Debug failed executions and retry them
@@ -18,7 +18,13 @@ The skill triggers automatically whenever you mention n8n, workflows, executions
 Install the CLI:
 
 ```bash
-npm install -g n8n-agent-cli
+npm install -g @11x.agency/n8n-cli
+```
+
+Or use npx without installing:
+
+```bash
+npx @11x.agency/n8n-cli doctor
 ```
 
 Set your n8n credentials:
@@ -37,5 +43,5 @@ export N8N_API_KEY="your-api-key"
 
 ## Links
 
-- [n8n-agent-cli on GitHub](https://github.com/robinsadeghpour/n8n-cli) — source code, full docs, and CLI reference
-- [n8n-agent-cli on npm](https://www.npmjs.com/package/n8n-agent-cli)
+- [@11x.agency/n8n-cli on npm](https://www.npmjs.com/package/@11x.agency/n8n-cli)
+- [Source code on GitHub](https://github.com/robinsadeghpour/n8n-cli)
