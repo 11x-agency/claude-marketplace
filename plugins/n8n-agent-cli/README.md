@@ -6,10 +6,12 @@ A Claude Code plugin that teaches Claude how to use [@11x.agency/n8n-cli](https:
 
 The plugin gives Claude knowledge of all n8n-cli commands so it can:
 
-- List, create, update, and delete workflows
+- List, create, update, and delete workflows (with progressive disclosure — summaries by default)
 - Debug failed executions and retry them
-- Manage variables and tags
-- Check API connectivity
+- Manage variables, tags, credentials, users, and projects
+- Paginate through results with cursor-based pagination
+- Select specific fields to minimize token usage
+- Run security audits and check API connectivity
 
 The skill triggers automatically whenever you mention n8n, workflows, executions, or automations.
 

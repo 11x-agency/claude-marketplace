@@ -6,7 +6,7 @@ A [Claude Code plugin marketplace](https://docs.anthropic.com/en/docs/claude-cod
 
 | Plugin | Description | Invoke |
 |--------|-------------|--------|
-| **n8n-agent-cli** | Manage n8n workflows, executions, variables, and tags via [@11x.agency/n8n-cli](https://www.npmjs.com/package/@11x.agency/n8n-cli) | `/n8n-agent-cli` |
+| **n8n-agent-cli** | Manage n8n workflows, executions, variables, tags, credentials, users, and projects via [@11x.agency/n8n-cli](https://www.npmjs.com/package/@11x.agency/n8n-cli) | `/n8n-agent-cli` |
 
 ## Install
 
