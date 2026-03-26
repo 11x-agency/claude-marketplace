@@ -1,0 +1,11 @@
+{
+  "name": "n8n-evals",
+  "description": "Guide for setting up n8n's native evaluation framework to test AI workflows — evaluation triggers, test datasets, scoring metrics, and regression tests",
+  "version": "1.0.0",
+  "author": {
+    "name": "Robin Sadeghpour"
+  },
+  "repository": "https://github.com/11x-agency/claude-marketplace",
+  "license": "MIT",
+  "keywords": ["n8n", "evals", "evaluation", "testing", "ai-agent", "workflow"]
+}

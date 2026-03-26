@@ -7,6 +7,7 @@ A [Claude Code plugin marketplace](https://docs.anthropic.com/en/docs/claude-cod
 | Plugin | Description | Invoke |
 |--------|-------------|--------|
 | **n8n-agent-cli** | Manage n8n workflows, executions, variables, tags, credentials, users, and projects via [@11x.agency/n8n-cli](https://www.npmjs.com/package/@11x.agency/n8n-cli) | `/n8n-agent-cli` |
+| **n8n-evals** | Set up n8n's native evaluation framework — test datasets, scoring metrics, regression tests for AI workflows | `/n8n-evals` |
 
 ## Install
 
@@ -33,7 +34,8 @@ To auto-enable plugins for a specific project, add to `.claude/settings.json`:
     }
   },
   "enabledPlugins": {
-    "n8n-agent-cli@11x-marketplace": true
+    "n8n-agent-cli@11x-marketplace": true,
+    "n8n-evals@11x-marketplace": true
   }
 }
 ```
