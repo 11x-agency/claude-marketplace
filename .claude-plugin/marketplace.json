@@ -20,7 +20,7 @@
       "name": "brand-document",
       "source": "./plugins/brand-document",
       "description": "Generate on-brand PDF documents (proposals, reports, case studies) using the 11x Agency design language with fixed A4 page templates",
-      "version": "1.0.0"
+      "version": "2.0.0"
     }
   ]
 }
