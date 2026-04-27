@@ -4,21 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{DOCUMENT_TITLE}}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;500;600&family=Lora:ital,wght@0,400..600;1,400..600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --background: #FAFAFA;
-      --surface: #FFFFFF;
-      --surface-alt: #F4F4F5;
-      --foreground: #0A0A0A;
-      --text-secondary: #545454;
-      --text-muted: #888888;
-      --border: #DBDBDB;
-      --border-subtle: #E8E8E8;
-      --gradient-rgb: linear-gradient(90deg, #33090F 0%, #C93B32 13%, #F8863A 25%, #C8D47A 38%, #6A8E50 50%, #002211 62%, #001A3D 74%, #3B7FCC 86%, #99CCFF 97%);
-      --font-serif: 'Cormorant Garamond', serif;
-      --font-sans: 'Outfit', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --cream: #f9f7f2;
+      --ash-950: #21211e;
+      --ash-700: #4a4a45;
+      --ash-500: #7a7a73;
+      --clay-600: #c14606;
+      --clay-500: #d96409;
+      --border: #e2dcd0;
+      --border-subtle: #ece6da;
+      --font-display: 'Grenze Gotisch', serif;
+      --font-serif:   'Lora', 'Times New Roman', serif;
+      --font-mono:    'JetBrains Mono', monospace;
     }
 
     @page { size: A4; margin: 0; }
@@ -26,10 +27,10 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #fff;
-      color: var(--foreground);
-      font-family: var(--font-sans);
-      font-weight: 300;
+      background: var(--cream);
+      color: var(--ash-950);
+      font-family: var(--font-serif);
+      font-weight: 400;
       line-height: 1.7;
       font-size: 14px;
       -webkit-print-color-adjust: exact;
@@ -40,7 +41,7 @@
     .page {
       width: 210mm;
       height: 297mm;
-      background: var(--background);
+      background: var(--cream);
       position: relative;
       overflow: hidden;
       page-break-after: always;
@@ -50,15 +51,43 @@
 
     .page:last-child { page-break-after: auto; }
 
-    .page-gradient {
-      height: 4px;
-      background: var(--gradient-rgb);
+    .top-rule {
+      position: relative;
+      padding: 32px 56px 0;
       flex-shrink: 0;
+      z-index: 2;
+      height: 64px;
+    }
+    .top-rule__logotype {
+      height: 22px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      position: absolute;
+      left: 56px;
+      bottom: 14px;
+      z-index: 2;
+    }
+    .top-rule__line {
+      position: absolute;
+      left: 96px;
+      right: 56px;
+      bottom: 14px;
+      height: 2px;
+      background: var(--clay-600);
+    }
+    .top-rule__line-bottom {
+      position: absolute;
+      left: 56px;
+      right: 56px;
+      bottom: 8px;
+      height: 2px;
+      background: var(--clay-600);
     }
 
     .page-content {
       flex: 1;
-      padding: 48px 56px;
+      padding: 24px 56px 24px;
       display: flex;
       flex-direction: column;
     }
@@ -71,19 +100,16 @@
       flex-shrink: 0;
     }
 
-    .page-footer-logo {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
+    .page-footer-logo img {
+      height: 18px;
+      display: block;
     }
-
-    .page-footer-logo .bracket { color: var(--border); }
 
     .page-footer-num {
       font-family: var(--font-mono);
       font-size: 10px;
-      color: var(--text-muted);
+      color: var(--ash-500);
+      letter-spacing: 0.1em;
     }
 
     /* ---- Typography ---- */
@@ -91,60 +117,67 @@
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 400;
-      color: var(--text-muted);
+      color: var(--clay-600);
       letter-spacing: 0.15em;
+      text-transform: uppercase;
       margin-bottom: 12px;
+    }
+
+    .kicker {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 2.2rem;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--clay-600);
+      align-self: flex-start;
+      margin-bottom: 20px;
+      padding-bottom: 2px;
+      border-bottom: 2px solid var(--clay-600);
     }
 
     h1 {
       font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: 3.2rem;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
+      font-weight: 500;
+      font-size: 3.4rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ash-950);
       margin-bottom: 24px;
     }
 
     h2 {
       font-family: var(--font-serif);
-      font-weight: 300;
+      font-weight: 500;
       font-size: 2rem;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.02em;
+      color: var(--ash-950);
       margin-bottom: 14px;
     }
 
     h3 {
       font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: 1.35rem;
-      letter-spacing: -0.03em;
+      font-weight: 500;
+      font-size: 1.3rem;
+      letter-spacing: -0.01em;
+      color: var(--ash-950);
       margin-bottom: 8px;
     }
 
     p {
-      color: var(--text-secondary);
+      color: var(--ash-700);
       margin-bottom: 16px;
       font-size: 14px;
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
     p:last-child { margin-bottom: 0; }
 
     .lead {
-      font-size: 15px;
-      color: var(--text-secondary);
+      font-size: 16px;
+      color: var(--ash-700);
       margin-bottom: 28px;
     }
-
-    /* ---- Logo ---- */
-    .logo {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      margin-bottom: 48px;
-    }
-    .logo .bracket { color: var(--text-muted); }
 
     /* ---- Meta info ---- */
     .meta {
@@ -164,21 +197,21 @@
       font-size: 10px;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--ash-500);
     }
 
     .meta-value {
-      font-family: var(--font-sans);
+      font-family: var(--font-serif);
       font-size: 14px;
-      color: var(--foreground);
-      font-weight: 400;
+      color: var(--ash-950);
+      font-weight: 500;
     }
 
     /* ---- Divider ---- */
     .divider {
-      height: 4px;
-      background: var(--gradient-rgb);
-      margin: 32px 0;
+      height: 1px;
+      background: var(--clay-600);
+      margin: 28px 0;
       border: none;
     }
 
@@ -193,7 +226,7 @@
     }
 
     .card {
-      background: var(--background);
+      background: var(--cream);
       padding: 24px;
     }
 
@@ -203,7 +236,7 @@
       font-weight: 400;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--text-muted);
+      color: var(--clay-600);
       margin-bottom: 10px;
     }
 
@@ -221,7 +254,7 @@
     }
 
     .status-card {
-      background: var(--background);
+      background: var(--cream);
       padding: 24px 20px;
       text-align: center;
     }
@@ -230,6 +263,7 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
+      background: var(--clay-600);
       margin: 0 auto 12px;
     }
 
@@ -268,15 +302,16 @@
     .flow-number {
       font-family: var(--font-mono);
       font-size: 11px;
-      color: var(--text-muted);
+      color: var(--clay-600);
       min-width: 28px;
       height: 28px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid var(--border);
+      border: 1px solid var(--clay-600);
       border-radius: 50%;
       flex-shrink: 0;
+      background: var(--cream);
     }
 
     .flow-content h3 { font-size: 1.05rem; margin-bottom: 3px; }
@@ -304,13 +339,13 @@
       content: "[ 0" counter(q) " ]";
       font-family: var(--font-mono);
       font-size: 10px;
-      color: var(--text-muted);
+      color: var(--clay-600);
       letter-spacing: 0.1em;
       flex-shrink: 0;
     }
 
-    .questions li span { color: var(--text-secondary); font-size: 13px; }
-    .questions li strong { color: var(--foreground); font-weight: 400; }
+    .questions li span { color: var(--ash-700); font-size: 13px; }
+    .questions li strong { color: var(--ash-950); font-weight: 500; }
 
     /* ---- Pills ---- */
     .pills {
@@ -324,9 +359,9 @@
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.1em;
-      color: var(--text-secondary);
+      color: var(--ash-950);
       padding: 6px 16px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--clay-600);
       border-radius: 9999px;
     }
 
@@ -340,13 +375,13 @@
 
 <!-- PAGE 1: Cover -->
 <div class="page">
-  <div class="page-gradient"></div>
+  <div class="top-rule">
+    <img class="top-rule__logotype" src="logotype-11x.svg" alt="11x" />
+    <span class="top-rule__line"></span>
+    <span class="top-rule__line-bottom"></span>
+  </div>
   <div class="page-content">
-    <div class="logo">
-      <span class="bracket">[</span> 11x Agency <span class="bracket">]</span>
-    </div>
-
-    <div class="section-prefix">// {{DOCUMENT_TYPE}}</div>
+    <div class="kicker">{{KICKER}}</div>
     <h1>{{TITLE}}</h1>
     <p class="lead">{{LEAD_TEXT}}</p>
 
@@ -374,15 +409,22 @@
 
     <div class="spacer"></div>
   </div>
+
   <div class="page-footer">
-    <div class="page-footer-logo"><span class="bracket">[</span> 11x Agency <span class="bracket">]</span></div>
+    <div class="page-footer-logo">
+      <img src="logotype-11x.svg" alt="11x" />
+    </div>
     <div class="page-footer-num">1 / {{TOTAL_PAGES}}</div>
   </div>
 </div>
 
 <!-- PAGE 2+: Content pages -->
 <div class="page">
-  <div class="page-gradient"></div>
+  <div class="top-rule">
+    <img class="top-rule__logotype" src="logotype-11x.svg" alt="11x" />
+    <span class="top-rule__line"></span>
+    <span class="top-rule__line-bottom"></span>
+  </div>
   <div class="page-content">
 
     <!-- Sections go here. Use <hr class="divider"> between sections on the same page. -->
@@ -390,7 +432,9 @@
     <div class="spacer"></div>
   </div>
   <div class="page-footer">
-    <div class="page-footer-logo"><span class="bracket">[</span> 11x Agency <span class="bracket">]</span></div>
+    <div class="page-footer-logo">
+      <img src="logotype-11x.svg" alt="11x" />
+    </div>
     <div class="page-footer-num">2 / {{TOTAL_PAGES}}</div>
   </div>
 </div>

@@ -15,58 +15,62 @@ Always use light mode. No dark mode.
 
 | Token | Hex | Usage |
 |-------|-----|-------|
-| `background` | `#FAFAFA` | Page background |
-| `surface` | `#FFFFFF` | Cards on hover, elevated elements |
-| `surface-alt` | `#F4F4F5` | Secondary panels |
-| `foreground` | `#0A0A0A` | Headings, primary text |
-| `text-secondary` | `#545454` | Body copy, descriptions |
-| `text-muted` | `#888888` | Labels, mono decorators, page numbers |
-| `border` | `#DBDBDB` | Visible borders, pills |
-| `border-subtle` | `#E8E8E8` | Card grid lines, question dividers |
+| `cream` | `#f9f7f2` | Page background |
+| `ash-950` | `#21211e` | Headings, primary text, logo |
+| `ash-700` | `#4a4a45` | Body copy |
+| `ash-500` | `#7a7a73` | Meta labels, page numbers |
+| `clay-600` | `#c14606` | Primary accent — rules, dividers, kicker, mono prefixes, borders on numbered/status elements |
+| `clay-500` | `#d96409` | Secondary accent (use sparingly for hover/highlight states) |
+| `border` | `#e2dcd0` | Visible borders |
+| `border-subtle` | `#ece6da` | Card grid lines, question dividers |
 
-### The RGB gradient (signature element)
+### Clay accent (signature element)
 
-```css
-linear-gradient(90deg,
-  #33090F 0%, #C93B32 13%, #F8863A 25%, #C8D47A 38%,
-  #6A8E50 50%, #002211 62%, #001A3D 74%, #3B7FCC 86%, #99CCFF 97%
-)
-```
+The 11x mark of identity is **3px solid clay-600** rules. Where it appears:
 
-Where the gradient appears:
-- 4px bar at the top of every page
-- Section divider lines between major sections within a page
-- Flow step number border colors pick from the gradient (red, orange, green, blue)
-- Status indicator dots
+- Top of every page: a double-rule (3px clay-600 line + 3px clay-600 line, 8px apart) — see `.page-rule` in the template
+- Section dividers between major sections within a page (`<hr class="divider">`)
+- Underline beneath the logo (96px wide)
+- Bottom border on the cover kicker
+- Borders on flow-step numbers, status dots, and pills
+- Color of mono section prefixes (`// 01 SECTION`)
 
-Where the gradient does NOT appear:
-- As section backgrounds
+The clay accent does NOT appear:
+- As a section background fill
 - On body text
-- On icons
+- On icons or imagery
+
+There is no rainbow gradient. The previous gradient system has been retired.
 
 ### Typography
 
 | Family | CSS Variable | Role |
 |--------|-------------|------|
-| Cormorant Garamond | `--font-serif` | Headlines (h1, h2, h3). Weight 300. |
-| Outfit | `--font-sans` | Body copy, descriptions. Weight 300-400. |
-| JetBrains Mono | `--font-mono` | Section prefixes, labels, page numbers, pills. Weight 400. |
+| Grenze Gotisch | `--font-display` | Cover kicker only. Weight 500. |
+| Lora | `--font-serif` | Headlines (h1, h2, h3) and body copy. Weight 400-500. |
+| JetBrains Mono | `--font-mono` | Section prefixes, meta labels, page numbers, pill text. Weight 400. |
 
 Load from Google Fonts:
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;500;600&family=Lora:ital,wght@0,400..600;1,400..600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 ```
 
 ### Type scale
 
 | Element | Font | Size | Weight | Extras |
 |---------|------|------|--------|--------|
-| h1 | Serif | 3.2rem | 300 | `line-height: 0.95; letter-spacing: -0.04em` |
-| h2 | Serif | 2rem | 300 | `letter-spacing: -0.04em` |
-| h3 | Serif | 1.35rem | 300 | `letter-spacing: -0.03em` |
-| Body | Sans | 14px | 300 | `line-height: 1.75` |
-| Labels / prefixes | Mono | 10-11px | 400 | `letter-spacing: 0.15em` |
-| Page numbers | Mono | 10px | 400 | |
+| `.kicker` (cover) | Grenze Gotisch | 4.4rem | 500 | `color: clay-600; border-bottom: 4px solid clay-600` |
+| h1 | Lora | 3.4rem | 500 | `line-height: 1.05; letter-spacing: -0.02em` |
+| h2 | Lora | 2rem | 500 | `letter-spacing: -0.02em` |
+| h3 | Lora | 1.3rem | 500 | `letter-spacing: -0.01em` |
+| Body | Lora | 14px | 400 | `line-height: 1.7; color: ash-700` |
+| Lead | Lora | 16px | 400 | `color: ash-700` |
+| Labels / prefixes | Mono | 10-11px | 400 | `letter-spacing: 0.15em; uppercase` |
+| Page numbers | Mono | 10px | 400 | `color: ash-500` |
+
+Lora reads thin below weight 400 in print — never use 300.
 
 ### Section prefixes
 
@@ -74,18 +78,35 @@ Every section starts with a mono prefix above the heading:
 ```
 // 01 SECTION NAME
 ```
-Format: `//` + space + two-digit number + space + uppercase label. Color: `text-muted`.
+Format: `//` + space + two-digit number + space + uppercase label. Color: `clay-600`.
 
-### Logo
+### Eyebrow / top rule
+
+Every page opens with the same eyebrow band (matches the LinkedIn carousel exactly): logo on the left, a clay-600 rule from the logo's right edge to the right margin, and a second clay-600 rule edge-to-edge directly below it.
 
 ```html
-<span class="bracket">[</span> 11x Agency <span class="bracket">]</span>
+<div class="top-rule">
+  <img class="top-rule__logotype" src="logotype-11x.svg" alt="11x" />
+  <span class="top-rule__line"></span>
+  <span class="top-rule__line-bottom"></span>
+</div>
 ```
-Font: mono, 12px in header, 10px in footers. Brackets use `text-muted` color.
+- Logo: `height: 22px`, anchored bottom-left of the band
+- Top line: starts at `left: 96px` (just past the logo), runs to `right: 56px`, 2px clay-600
+- Bottom line: full-width edge-to-edge, 6px below the top line, 2px clay-600
+- Band height: 64px, padding `32px 56px 0`
+
+The social slides scale this same eyebrow up (logo 52px, 3px rules) for square 1080×1350 carousels. PDF deliverables use the smaller version so the eyebrow stays a refined header rather than a hero block.
+
+The footer logo (smaller, 18px) appears alongside the page number and uses the same SVG. The bracketed mono `[ 11x Agency ]` pattern from the previous brand has been retired.
 
 ## HTML template
 
 A starter template is bundled at `assets/template.html` (relative to this skill). Read it before generating any document — it contains the full CSS, page structure, and component markup. Use it as your starting point and adapt it to the content you're building.
+
+Bundled assets in `assets/`:
+- `template.html` — A4 starter
+- `logotype-11x.svg` — primary logo (used in header + footer)
 
 ## Page template architecture
 
@@ -99,13 +120,17 @@ CSS page breaks are unreliable. They split headings from content, cut card grids
 
 ```html
 <div class="page">
-  <div class="page-gradient"></div>  <!-- 4px RGB bar at top -->
+  <div class="top-rule">                 <!-- eyebrow: logo + double clay rule -->
+    <img class="top-rule__logotype" src="logotype-11x.svg" alt="11x" />
+    <span class="top-rule__line"></span>
+    <span class="top-rule__line-bottom"></span>
+  </div>
   <div class="page-content">
     <!-- Your content here -->
-    <div class="spacer"></div>       <!-- Pushes footer down -->
+    <div class="spacer"></div>           <!-- Pushes footer down -->
   </div>
   <div class="page-footer">
-    <div class="page-footer-logo">[11x Agency]</div>
+    <div class="page-footer-logo"><img src="logotype-11x.svg" alt="11x" /></div>
     <div class="page-footer-num">1 / 5</div>
   </div>
 </div>
@@ -119,7 +144,7 @@ CSS page breaks are unreliable. They split headings from content, cut card grids
 .page {
   width: 210mm;
   height: 297mm;
-  background: var(--background);
+  background: var(--cream);
   position: relative;
   overflow: hidden;
   page-break-after: always;
@@ -129,15 +154,39 @@ CSS page breaks are unreliable. They split headings from content, cut card grids
 
 .page:last-child { page-break-after: auto; }
 
-.page-gradient {
-  height: 4px;
-  background: var(--gradient-rgb);
+.top-rule {
+  position: relative;
+  padding: 32px 56px 0;
   flex-shrink: 0;
+  z-index: 2;
+  height: 64px;
+}
+.top-rule__logotype {
+  height: 22px;
+  position: absolute;
+  left: 56px;
+  bottom: 14px;
+}
+.top-rule__line {
+  position: absolute;
+  left: 96px;
+  right: 56px;
+  bottom: 14px;
+  height: 2px;
+  background: var(--clay-600);
+}
+.top-rule__line-bottom {
+  position: absolute;
+  left: 56px;
+  right: 56px;
+  bottom: 8px;
+  height: 2px;
+  background: var(--clay-600);
 }
 
 .page-content {
   flex: 1;
-  padding: 48px 56px;
+  padding: 40px 56px 24px;
   display: flex;
   flex-direction: column;
 }
@@ -156,10 +205,10 @@ CSS page breaks are unreliable. They split headings from content, cut card grids
 ### How to lay out content across pages
 
 1. Start by writing all the content sections
-2. Estimate how much fits on one A4 page (the content area is roughly 210mm x 250mm after padding, gradient bar, and footer)
+2. Estimate how much fits on one A4 page (the content area is roughly 210mm × 250mm after padding, top rule, and footer)
 3. Group related sections that fit together. Two short sections on one page is better than one section per page with lots of whitespace.
 4. If a section is too tall for a page, split it across two pages at a natural break point (e.g., after a paragraph, between card grids)
-5. The first page usually has: logo, title, lead text, meta info, divider, then the first section
+5. The first page is the cover: kicker, h1, lead, meta, divider, then the first section
 6. The last page usually has the least content and can include a sign-off or footer section
 
 ### Component patterns
@@ -176,22 +225,23 @@ CSS page breaks are unreliable. They split headings from content, cut card grids
 </div>
 ```
 
-**Status grid** (3 columns with colored dots):
+**Status grid** (3 columns with clay dots):
 ```html
 <div class="status-grid">
   <div class="status-card">
-    <div class="status-dot" style="background: #F8863A;"></div>
+    <div class="status-dot"></div>
     <h3>Status name</h3>
     <p>Description</p>
   </div>
 </div>
 ```
+All dots are clay-600 — no inline color overrides.
 
 **Flow steps** (numbered vertical flow):
 ```html
 <div class="flow">
   <div class="flow-step">
-    <div class="flow-number" style="border-color: #C93B32;">1</div>
+    <div class="flow-number">1</div>
     <div class="flow-content">
       <h3>Step title</h3>
       <p>Step description</p>
@@ -199,7 +249,7 @@ CSS page breaks are unreliable. They split headings from content, cut card grids
   </div>
 </div>
 ```
-Use gradient colors for step borders: 1=#C93B32, 2=#F8863A, 3=#6A8E50, 4=#3B7FCC.
+All step numbers use clay-600 borders — no inline color overrides.
 
 **Questions list** (numbered with mono prefixes):
 ```html
@@ -215,7 +265,7 @@ Use gradient colors for step borders: 1=#C93B32, 2=#F8863A, 3=#6A8E50, 4=#3B7FCC
 </div>
 ```
 
-**Divider** (gradient line between sections on the same page):
+**Divider** (3px clay-600 line between sections on the same page):
 ```html
 <hr class="divider">
 ```
@@ -265,18 +315,19 @@ kill %1 2>/dev/null
 
 The key settings:
 - `width: '210mm', height: '297mm'` matches the page div dimensions exactly
-- `printBackground: true` renders the gradient and background colors
+- `printBackground: true` renders the cream background and clay rules
 - `displayHeaderFooter: false` prevents Chrome from adding date/URL/page annotations
 - All margins `'0'` because the page template handles its own padding
+
+The HTML file must be served from the same directory as `logotype-11x.svg` so the relative `src` paths resolve.
 
 ## Do / Don't
 
 **Do:**
 - Use fixed A4 page divs for every document
-- Put the RGB gradient bar at the top of every page
-- Include page numbers and logo in every page footer
-- Use serif for headings, sans for body, mono for labels
-- Keep text light weight (300) for the editorial feel
+- Put the double clay-600 rule at the top of every page
+- Include page numbers and SVG logo in every page footer
+- Use Lora at weight 400-500 for headings and body, JetBrains Mono for labels, Grenze Gotisch only for the cover kicker
 - Run a humanizer pass on all copy
 - Group multiple short sections on one page to avoid waste
 
@@ -284,7 +335,8 @@ The key settings:
 - Use dark mode
 - Rely on CSS page-break rules (they're unreliable)
 - Let content overflow a page div
-- Use bold/heavy font weights (no 700+)
+- Use Lora at weight 300 — reads too thin in print
 - Add emojis
-- Use the gradient as a background fill on large areas
+- Reintroduce the old multi-color gradient
+- Use the textured social background — PDFs use solid cream for legibility
 - Hardcode hex values in elements (use CSS variables)
