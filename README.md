@@ -8,8 +8,8 @@ A [Claude Code plugin marketplace](https://docs.anthropic.com/en/docs/claude-cod
 |--------|-------------|--------|
 | **n8n-agent-cli** | Manage n8n workflows, executions, variables, tags, credentials, users, and projects via [@11x.agency/n8n-cli](https://www.npmjs.com/package/@11x.agency/n8n-cli) | `/n8n-agent-cli` |
 | **n8n-evals** | Set up n8n's native evaluation framework — test datasets, scoring metrics, regression tests for AI workflows | `/n8n-evals` |
-| **brand-document** | Generate on-brand PDF documents (proposals, reports, case studies) using the 11x Agency design language with fixed A4 page templates | Auto-triggers on document requests |
-| **pitch** | Generate a 2-page A4 PDF sales pitch in 11x brand — outcome-first headline, math-chain ROI, 3-phase growth charts, ops + risk sections | `/pitch` |
+
+> `brand-document` and `pitch` have moved to [11x-agency/claude-plugins](https://github.com/11x-agency/claude-plugins).
 
 ## Install
 
@@ -37,9 +37,7 @@ To auto-enable plugins for a specific project, add to `.claude/settings.json`:
   },
   "enabledPlugins": {
     "n8n-agent-cli@11x-marketplace": true,
-    "n8n-evals@11x-marketplace": true,
-    "brand-document@11x-marketplace": true,
-    "pitch@11x-marketplace": true
+    "n8n-evals@11x-marketplace": true
   }
 }
 ```

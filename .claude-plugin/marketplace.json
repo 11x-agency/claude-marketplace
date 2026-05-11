@@ -15,18 +15,6 @@
       "source": "./plugins/n8n-evals",
       "description": "Guide for setting up n8n's native evaluation framework to test AI workflows — evaluation triggers, test datasets, scoring metrics, and regression tests",
       "version": "1.0.0"
-    },
-    {
-      "name": "brand-document",
-      "source": "./plugins/brand-document",
-      "description": "Generate on-brand PDF documents (proposals, reports, case studies) using the 11x Agency design language with fixed A4 page templates",
-      "version": "2.0.0"
-    },
-    {
-      "name": "pitch",
-      "source": "./plugins/pitch",
-      "description": "Generate a 2-page A4 PDF sales pitch in 11x Agency brand for B2B engagements with a guaranteed deliverable + refund offer. Outcome-first headline, 4-step math chain, cumulative ARR projection, 3-phase growth charts, ops + risk + worst-case sections.",
-      "version": "1.0.1"
     }
   ]
 }
