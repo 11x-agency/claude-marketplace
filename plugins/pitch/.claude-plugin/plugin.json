@@ -1,0 +1,9 @@
+{
+  "name": "pitch",
+  "description": "Generate a 2-page A4 PDF sales pitch in 11x Agency brand for B2B engagements with a guaranteed deliverable + refund offer. Outcome-first headline, 4-step math chain, cumulative ARR projection, 3-phase growth charts, ops + risk + worst-case sections.",
+  "version": "1.0.1",
+  "author": {
+    "name": "11x Agency",
+    "url": "https://11x.agency"
+  }
+}

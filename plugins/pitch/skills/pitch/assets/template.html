@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zaymo + 11x</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400..600;1,400..600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f9f7f2;
+      --ash-950: #21211e;
+      --ash-700: #4a4a45;
+      --ash-500: #7a7a73;
+      --clay-600: #c14606;
+      --border: #e2dcd0;
+      --border-subtle: #ece6da;
+      --clay-tint:    rgba(193, 70, 6, 0.04);
+      --clay-tint-2:  rgba(193, 70, 6, 0.025);
+      --font-headline: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body:     'Lora', 'Times New Roman', serif;
+      --font-mono:     'JetBrains Mono', monospace;
+    }
+
+    @page { size: A4; margin: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--cream);
+      color: var(--ash-950);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.6;
+      font-size: 13px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page { width: 210mm; height: 297mm; background: var(--cream); position: relative; overflow: hidden; page-break-after: always; display: flex; flex-direction: column; }
+    .page:last-child { page-break-after: auto; }
+
+    .top-rule { position: relative; padding: 28px 56px 0; flex-shrink: 0; z-index: 2; height: 60px; }
+    .top-rule__logotype { height: 22px; width: auto; object-fit: contain; display: block; position: absolute; left: 56px; bottom: 14px; z-index: 2; }
+    .top-rule__line { position: absolute; left: 96px; right: 56px; bottom: 14px; height: 2px; background: var(--clay-600); }
+    .top-rule__line-bottom { position: absolute; left: 56px; right: 56px; bottom: 8px; height: 2px; background: var(--clay-600); }
+
+    .page-content { flex: 1; padding: 14px 64px 10px; display: flex; flex-direction: column; }
+    .page-footer { padding: 0 56px 14px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+    .page-footer-logo img { height: 16px; display: block; }
+    .page-footer-num { font-family: var(--font-mono); font-size: 9px; color: var(--ash-500); letter-spacing: 0.1em; }
+
+    .meta-tag { font-family: var(--font-mono); font-size: 9.5px; color: var(--ash-500); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 8px; }
+    .meta-tag--p2 { color: var(--ash-500); margin-bottom: 14px; }
+
+    h1 {
+      font-family: var(--font-headline);
+      font-weight: 500;
+      font-size: 1.55rem;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      color: var(--ash-950);
+      margin-bottom: 8px;
+    }
+    h1 strong { font-weight: 700; }
+
+    h2 {
+      font-family: var(--font-headline);
+      font-weight: 500;
+      font-size: 0.92rem;
+      letter-spacing: -0.005em;
+      color: var(--ash-950);
+      margin-top: 11px;
+      margin-bottom: 4px;
+    }
+
+    p { color: var(--ash-700); margin-bottom: 6px; font-size: 12px; line-height: 1.55; }
+    p:last-child { margin-bottom: 0; }
+    p strong { color: var(--ash-950); font-weight: 600; }
+
+    .terms-line { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.08em; color: var(--clay-600); text-transform: uppercase; margin-bottom: 10px; }
+
+    /* === FLOW DIAGRAM (replaces ROI table) === */
+
+    .flow { margin: 4px 0 0; }
+
+    .flow-stage-label {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ash-500);
+      margin-bottom: 4px;
+    }
+
+    /* Inputs row — 3 cards */
+    .flow-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+    .input-card {
+      background: var(--clay-tint);
+      border-left: 2px solid var(--clay-600);
+      padding: 8px 11px 9px;
+    }
+    .input-card .lbl {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--ash-500);
+      margin-bottom: 3px;
+    }
+    .input-card .val {
+      font-family: var(--font-headline);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--ash-950);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+    .input-card .note {
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      color: var(--ash-500);
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    /* Down arrow between stages */
+    .flow-arrow {
+      text-align: center;
+      color: var(--clay-600);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1;
+      padding: 5px 0 4px;
+    }
+
+    /* Engine box */
+    .flow-engine {
+      border: 1px dashed var(--clay-600);
+      background: var(--clay-tint-2);
+      padding: 9px 14px 10px;
+      text-align: center;
+    }
+    .engine-lbl {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay-600);
+      margin-bottom: 4px;
+    }
+    .engine-flow {
+      font-family: var(--font-headline);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--ash-950);
+      letter-spacing: -0.005em;
+      margin-bottom: 3px;
+    }
+    .engine-flow .sep { color: var(--clay-600); margin: 0 5px; font-weight: 400; }
+    .engine-meta {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--ash-500);
+      font-style: italic;
+    }
+
+    /* Output pipeline — 4 cards with operator labels in the gutters (no circles) */
+    .flow-pipe {
+      display: grid;
+      grid-template-columns: 1.2fr 56px 1.2fr 56px 1.2fr 56px 1.2fr;
+      align-items: stretch;
+      gap: 0;
+      margin-top: 8px;
+    }
+    .pipe-card {
+      background: var(--clay-tint);
+      border-top: 2px solid var(--clay-600);
+      padding: 18px 14px 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 110px;
+    }
+    .pipe-card--final {
+      background: var(--clay-600);
+      border-top: 2px solid var(--clay-600);
+    }
+    .pipe-val {
+      font-family: var(--font-headline);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ash-950);
+      line-height: 1.1;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .pipe-card--final .pipe-val { color: #fff; }
+    .pipe-lbl {
+      font-family: var(--font-headline);
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--ash-500);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      line-height: 1.3;
+    }
+    .pipe-card--final .pipe-lbl { color: rgba(255,255,255,0.92); }
+    .pipe-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay-600);
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    /* Operator markers in the gutters */
+    .pipe-glyph {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6px;
+      text-align: center;
+    }
+    .pipe-glyph .glyph-symbol {
+      font-family: var(--font-headline);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--clay-600);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .pipe-glyph .glyph-val {
+      font-family: var(--font-headline);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ash-950);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+    .pipe-glyph .glyph-note {
+      font-family: var(--font-body);
+      font-size: 9px;
+      color: var(--ash-500);
+      font-style: italic;
+      margin-top: 2px;
+      line-height: 1.2;
+    }
+
+    /* Cumulative summary block */
+    .flow-cumulative {
+      margin-top: 13px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 8px;
+    }
+    .cum-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 4px 0;
+      font-size: 12px;
+      gap: 14px;
+    }
+    .cum-lbl {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--ash-500);
+      flex-shrink: 0;
+    }
+    .cum-val {
+      font-family: var(--font-headline);
+      font-weight: 500;
+      color: var(--ash-950);
+      text-align: right;
+    }
+    .cum-row--final {
+      border-top: 1.5px solid var(--clay-600);
+      margin-top: 4px;
+      padding-top: 8px;
+    }
+    .cum-row--final .cum-lbl { color: var(--clay-600); font-weight: 400; }
+    .cum-row--final .cum-val { color: var(--clay-600); font-size: 14px; font-weight: 700; }
+    .cum-lbl em { font-style: italic; text-transform: none; letter-spacing: 0; color: var(--ash-500); font-size: 9.5px; font-family: var(--font-body); }
+    .pipe-source { font-family: var(--font-body); font-size: 10.5px; font-style: italic; color: var(--ash-500); margin: 8px 0 0; line-height: 1.45; }
+    .cum-footnote { font-family: var(--font-body); font-size: 10px; font-style: italic; color: var(--ash-500); margin: 5px 0 0; line-height: 1.4; }
+
+    /* === Page 2: ops blocks === */
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-subtle); border: 1px solid var(--border-subtle); margin: 7px 0; }
+    .risk-card { background: var(--cream); padding: 12px 15px; }
+    .risk-card .rl { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--clay-600); margin-bottom: 5px; }
+    .risk-card p { font-size: 12px; margin: 0; line-height: 1.5; }
+
+    .compounds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 8px; }
+    .compounds-grid .item { border-left: 2px solid var(--clay-600); padding: 2px 0 2px 12px; }
+    .compounds-grid .item .lbl { font-family: var(--font-headline); font-weight: 600; font-size: 11.5px; color: var(--ash-950); margin-bottom: 2px; }
+    .compounds-grid .item p { margin: 0; font-size: 11.5px; line-height: 1.45; }
+
+    /* === Growth diagram === */
+    .growth-intro {
+      font-size: 12px;
+      color: var(--ash-700);
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+    .growth-intro strong { color: var(--ash-950); font-weight: 600; }
+
+    .growth {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 18px;
+      margin-top: 8px;
+    }
+    .growth-phase {
+      display: flex;
+      flex-direction: column;
+      border-top: 3px solid var(--clay-600);
+      padding-top: 10px;
+    }
+    .phase-header { margin-bottom: 8px; }
+    .phase-name {
+      font-family: var(--font-headline);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ash-950);
+      letter-spacing: -0.015em;
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+    .phase-tag {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--clay-600);
+    }
+    .phase-chart-block {
+      height: 78px;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+    }
+    .phase-chart {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+    .phase-chart .pc-yaxis {
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      fill: var(--ash-500);
+      letter-spacing: 0.04em;
+    }
+    .phase-chart .pc-xaxis {
+      font-family: var(--font-mono);
+      font-size: 7.5px;
+      fill: var(--ash-500);
+      letter-spacing: 0.04em;
+    }
+    .phase-chart .pc-label {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      fill: var(--clay-600);
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+    .phase-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .phase-list li {
+      font-size: 11px;
+      color: var(--ash-700);
+      line-height: 1.45;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .phase-list li:last-child { border-bottom: none; }
+    .phase-list li::before {
+      content: "—";
+      color: var(--clay-600);
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+    }
+
+    .spacer { flex: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 — value & math ============ -->
+<div class="page">
+  <div class="top-rule">
+    <img class="top-rule__logotype" src="logotype-11x.svg" alt="11x" />
+    <span class="top-rule__line"></span>
+    <span class="top-rule__line-bottom"></span>
+  </div>
+  <div class="page-content">
+    <div class="meta-tag">Zaymo · 9 May 2026</div>
+
+    <h1>An AI GTM engine you own.<br/>10 booked meetings every month, or <strong>you don't pay</strong>.</h1>
+
+    <p class="terms-line">$2,500 / month · 3-month engagement · refunded any month we miss</p>
+
+    <p>Zaymo is at roughly 1% of its addressable market: between 30,000 and 50,000 Klaviyo + Shopify subscription stores, according to Parker. We book 10 qualified meetings on Parker's calendar every month, so he can stop sourcing his own pipeline and stay on closing. <strong>10 is the guaranteed minimum.</strong> Each month we adjust to whatever's actually closing and push past 10.</p>
+
+    <h2>Every $1 we charge returns a guaranteed $2 to $3 in new MRR</h2>
+
+    <div class="flow">
+
+      <!-- Stage 1: Inputs -->
+      <div class="flow-stage-label">What goes in</div>
+      <div class="flow-inputs">
+        <div class="input-card">
+          <div class="lbl">Our retainer</div>
+          <div class="val">$2,500 / mo</div>
+          <div class="note">refunded any month we don't hit 10</div>
+        </div>
+        <div class="input-card">
+          <div class="lbl">Parker's time</div>
+          <div class="val">30 min / week</div>
+          <div class="note">a sync that tunes the buyer signals</div>
+        </div>
+        <div class="input-card">
+          <div class="lbl">Mailbox infra</div>
+          <div class="val">~$125 / mo</div>
+          <div class="note">paid by Zaymo, owned by Zaymo</div>
+        </div>
+      </div>
+
+      <div class="flow-arrow">▼</div>
+
+      <!-- Stage 2: Engine -->
+      <div class="flow-engine">
+        <div class="engine-lbl">11x GTM Engine — what we run</div>
+        <div class="engine-flow">Source<span class="sep">·</span>Score signals<span class="sep">·</span>Personalize<span class="sep">·</span>Send<span class="sep">·</span>Qualify<span class="sep">·</span>Book</div>
+        <div class="engine-meta">Klaviyo + Shopify subscription stores, filtered for fit and growth signals</div>
+      </div>
+
+      <div class="flow-arrow">▼</div>
+
+      <!-- Stage 3: Output pipeline -->
+      <div class="flow-stage-label" style="text-align: center;">What comes out — per month</div>
+      <div class="flow-pipe">
+        <div class="pipe-card">
+          <div class="pipe-tag">Guaranteed minimum</div>
+          <div class="pipe-val">10</div>
+          <div class="pipe-lbl">qualified meetings</div>
+        </div>
+        <div class="pipe-glyph">
+          <div class="glyph-symbol">×</div>
+          <div class="glyph-val">74%</div>
+          <div class="glyph-note">win rate</div>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-val">7–8</div>
+          <div class="pipe-lbl">new customers</div>
+        </div>
+        <div class="pipe-glyph">
+          <div class="glyph-symbol">×</div>
+          <div class="glyph-val">$800</div>
+          <div class="glyph-note">avg deal</div>
+        </div>
+        <div class="pipe-card">
+          <div class="pipe-val">$5.6–6.4k</div>
+          <div class="pipe-lbl">new MRR</div>
+        </div>
+        <div class="pipe-glyph">
+          <div class="glyph-symbol">−</div>
+          <div class="glyph-val">$2,500</div>
+          <div class="glyph-note">our retainer</div>
+        </div>
+        <div class="pipe-card pipe-card--final">
+          <div class="pipe-val">+$3.1–3.9k</div>
+          <div class="pipe-lbl">net MRR / mo</div>
+        </div>
+      </div>
+
+      <p class="pipe-source">Calculation based on the numbers Parker shared with us: 74% win rate and $800 average deal size.</p>
+
+      <!-- Cumulative summary -->
+      <div class="flow-cumulative">
+        <div class="cum-row">
+          <span class="cum-lbl">3-month engagement</span>
+          <span class="cum-val">21 to 24 customers · $16,800 to $19,200 MRR captured</span>
+        </div>
+        <div class="cum-row cum-row--final">
+          <span class="cum-lbl">Year-one ARR <em>(ignoring churn)</em></span>
+          <span class="cum-val">$202k to $230k</span>
+        </div>
+      </div>
+      <p class="cum-footnote">ARR shown is the best case — math without churn. We also help reduce churn and improve retention, so your real ARR lands as close to this number as possible.</p>
+
+    </div>
+
+    <div class="spacer"></div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-logo"><img src="logotype-11x.svg" alt="11x" /></div>
+    <div class="page-footer-num">11x Agency · 1 / 2</div>
+  </div>
+</div>
+
+<!-- ============ PAGE 2 — operations & risk ============ -->
+<div class="page">
+  <div class="top-rule">
+    <img class="top-rule__logotype" src="logotype-11x.svg" alt="11x" />
+    <span class="top-rule__line"></span>
+    <span class="top-rule__line-bottom"></span>
+  </div>
+  <div class="page-content">
+    <div class="meta-tag meta-tag--p2">Zaymo · continued</div>
+
+    <h2 style="margin-top: 0;">We grow with Zaymo</h2>
+    <p class="growth-intro">Hitting 10 meetings a month and never expanding is the <strong>minimum pace</strong>. Renewing past the engagement is where it gets bigger — we scale Zaymo's whole GTM engine with you. The three phases below, on the same MRR scale (no churn): solid bars are what we guarantee at 10/mo, faded bars in Compound are upside once ICP #2 is live.</p>
+
+    <div class="growth">
+      <div class="growth-phase">
+        <div class="phase-header">
+          <div class="phase-name">Build</div>
+          <div class="phase-tag">M1 — M3 · the engagement</div>
+        </div>
+        <div class="phase-chart-block">
+          <svg viewBox="0 0 150 78" xmlns="http://www.w3.org/2000/svg" class="phase-chart" preserveAspectRatio="xMidYMax meet">
+            <line x1="22" y1="10"  x2="146" y2="10"  stroke="#ece6da" stroke-width="0.5"/>
+            <line x1="22" y1="35"  x2="146" y2="35"  stroke="#ece6da" stroke-width="0.5"/>
+            <line x1="22" y1="60"  x2="146" y2="60"  stroke="#e2dcd0" stroke-width="0.7"/>
+            <text x="20" y="13" text-anchor="end" class="pc-yaxis">$80k</text>
+            <text x="20" y="38" text-anchor="end" class="pc-yaxis">$40k</text>
+            <text x="20" y="62" text-anchor="end" class="pc-yaxis">$0</text>
+            <g fill="#c14606" opacity="0.65">
+              <rect x="22"  y="56.5" width="28" height="3.5"/>
+              <rect x="70"  y="53"   width="28" height="7"/>
+              <rect x="118" y="49.5" width="28" height="10.5"/>
+            </g>
+            <text x="36"  y="70" text-anchor="middle" class="pc-xaxis">M1</text>
+            <text x="84"  y="70" text-anchor="middle" class="pc-xaxis">M2</text>
+            <text x="132" y="70" text-anchor="middle" class="pc-xaxis">M3</text>
+          </svg>
+        </div>
+        <ul class="phase-list">
+          <li>ICP #1 launched · Klaviyo + Shopify subscription stores</li>
+          <li>24–36 warmed mailboxes (weeks of calendar time, yours to keep)</li>
+          <li>Signal model + sequence library tuned to Zaymo's buyer</li>
+          <li>10 meetings/mo guaranteed · pipeline still in flight at engagement end</li>
+        </ul>
+      </div>
+
+      <div class="growth-phase">
+        <div class="phase-header">
+          <div class="phase-name">Scale</div>
+          <div class="phase-tag">M4 — M9 · if you renew</div>
+        </div>
+        <div class="phase-chart-block">
+          <svg viewBox="0 0 150 78" xmlns="http://www.w3.org/2000/svg" class="phase-chart" preserveAspectRatio="xMidYMax meet">
+            <line x1="22" y1="10"  x2="146" y2="10"  stroke="#ece6da" stroke-width="0.5"/>
+            <line x1="22" y1="35"  x2="146" y2="35"  stroke="#ece6da" stroke-width="0.5"/>
+            <line x1="22" y1="60"  x2="146" y2="60"  stroke="#e2dcd0" stroke-width="0.7"/>
+            <text x="20" y="13" text-anchor="end" class="pc-yaxis">$80k</text>
+            <text x="20" y="38" text-anchor="end" class="pc-yaxis">$40k</text>
+            <text x="20" y="62" text-anchor="end" class="pc-yaxis">$0</text>
+            <g fill="#c14606" opacity="0.65">
+              <rect x="22"  y="46"   width="14" height="14"/>
+              <rect x="44"  y="42.5" width="14" height="17.5"/>
+              <rect x="66"  y="39"   width="14" height="21"/>
+              <rect x="88"  y="35.5" width="14" height="24.5"/>
+              <rect x="110" y="32"   width="14" height="28"/>
+              <rect x="132" y="28.5" width="14" height="31.5"/>
+            </g>
+            <text x="29"  y="70" text-anchor="middle" class="pc-xaxis">M4</text>
+            <text x="51"  y="70" text-anchor="middle" class="pc-xaxis">M5</text>
+            <text x="73"  y="70" text-anchor="middle" class="pc-xaxis">M6</text>
+            <text x="95"  y="70" text-anchor="middle" class="pc-xaxis">M7</text>
+            <text x="117" y="70" text-anchor="middle" class="pc-xaxis">M8</text>
+            <text x="139" y="70" text-anchor="middle" class="pc-xaxis">M9</text>
+          </svg>
+        </div>
+        <ul class="phase-list">
+          <li>Push above the 10/mo minimum on ICP #1</li>
+          <li>New ICPs explored, validated, launched alongside #1</li>
+          <li>Sequence library v2 with conversion + reply data</li>
+          <li>Infrastructure scaled for higher capacity</li>
+        </ul>
+      </div>
+
+      <div class="growth-phase">
+        <div class="phase-header">
+          <div class="phase-name">Compound</div>
+          <div class="phase-tag">M10+ · the partnership</div>
+        </div>
+        <div class="phase-chart-block">
+          <svg viewBox="0 0 150 78" xmlns="http://www.w3.org/2000/svg" class="phase-chart" preserveAspectRatio="xMidYMax meet">
+            <line x1="22" y1="10"  x2="146" y2="10"  stroke="#ece6da" stroke-width="0.5"/>
+            <line x1="22" y1="35"  x2="146" y2="35"  stroke="#ece6da" stroke-width="0.5"/>
+            <line x1="22" y1="60"  x2="146" y2="60"  stroke="#e2dcd0" stroke-width="0.7"/>
+            <text x="20" y="13" text-anchor="end" class="pc-yaxis">$80k</text>
+            <text x="20" y="38" text-anchor="end" class="pc-yaxis">$40k</text>
+            <text x="20" y="62" text-anchor="end" class="pc-yaxis">$0</text>
+            <g fill="#c14606" opacity="0.65">
+              <rect x="22"  y="25"   width="28" height="35"/>
+              <rect x="70"  y="21.5" width="28" height="38.5"/>
+              <rect x="118" y="18"   width="28" height="42"/>
+            </g>
+            <g fill="#c14606" opacity="0.30" stroke="#c14606" stroke-width="0.4">
+              <rect x="22"  y="21.875" width="28" height="3.125"/>
+              <rect x="70"  y="16.5"   width="28" height="5"/>
+              <rect x="118" y="10.5"   width="28" height="7.5"/>
+            </g>
+            <text x="146" y="8" text-anchor="end" class="pc-label">↑ ICP #2 upside</text>
+            <text x="36"  y="70" text-anchor="middle" class="pc-xaxis">M10</text>
+            <text x="84"  y="70" text-anchor="middle" class="pc-xaxis">M11</text>
+            <text x="132" y="70" text-anchor="middle" class="pc-xaxis">M12</text>
+          </svg>
+        </div>
+        <ul class="phase-list">
+          <li>2–3 ICPs running in parallel</li>
+          <li>Cross-channel experiments (email + LinkedIn + outbound)</li>
+          <li>Continuous iteration on infra and sequences</li>
+          <li>11x running as Zaymo's outbound team</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>How it runs and the guarantee</h2>
+    <p>Per Parker, you already have 12 mailboxes — we start sending with those on day one. In parallel we add 24 more, which need around 3 weeks to warm up. After that, we can guarantee the numbers above. Zaymo owns every mailbox we set up, and you can cancel them monthly any time. <strong>Minimum 10 qualified meetings every month. If we miss in any month, that month's retainer is refunded in full.</strong></p>
+
+    <h2>What we run for you</h2>
+    <p>Sourcing, qualification, copy, sending, forwarding replies to Parker, and the weekly call. All built inside your Instantly and Clay accounts. You own every part of it and can keep running it on your own whether you renew with us or not.</p>
+
+    <h2>What we need from you</h2>
+    <p>A 30-minute weekly call with Parker, a shared Slack channel, and budget for 24 more Instantly mailboxes (~$100 to $150 / month, paid by Zaymo, owned by Zaymo, cancellable any time). The call is the one thing we can't do without — it's how we figure out what a high-fit Zaymo buyer actually looks like, and why month 2 always beats month 1.</p>
+
+    <h2>Risk assessment</h2>
+
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="rl">If we hit 10+ in a month</div>
+        <p><strong>Net +$3,100 to +$3,900 captured</strong> that month on new MRR vs. retainer. Engagement continues. Infrastructure stays with Zaymo.</p>
+      </div>
+      <div class="risk-card">
+        <div class="rl">If we miss 10 in a month</div>
+        <p><strong>That month's retainer is refunded in full.</strong> You keep every account, mailbox, sequence, and prospect list we built. Inbox subscription is monthly-cancellable.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 7px;"><strong>Worst case</strong>: if you walk after a missed month, you're only out about $200 to $300 of inbox spend — and that isn't wasted either. The mailboxes still work, they're yours, and you can cancel them monthly any time.</p>
+
+    <div class="spacer"></div>
+  </div>
+  <div class="page-footer">
+    <div class="page-footer-logo"><img src="logotype-11x.svg" alt="11x" /></div>
+    <div class="page-footer-num">11x Agency · 2 / 2</div>
+  </div>
+</div>
+
+</body>
+</html>
