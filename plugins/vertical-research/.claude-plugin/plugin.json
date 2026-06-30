@@ -1,0 +1,8 @@
+{
+  "name": "vertical-research",
+  "version": "1.0.0",
+  "description": "Run /research <niche> to evaluate a vertical/niche software opportunity end-to-end and output one sourced report (competitor map + verbatim review quotes + DataForSEO search demand + market sizing + build/moat + ranked risks + interview guide).",
+  "author": { "name": "Robin Faraj" },
+  "license": "MIT",
+  "keywords": ["market-research", "vertical-saas", "niche", "competitor-analysis", "reviews", "seo", "dataforseo", "go-no-go"]
+}

@@ -15,6 +15,12 @@
       "source": "./plugins/n8n-evals",
       "description": "Guide for setting up n8n's native evaluation framework to test AI workflows — evaluation triggers, test datasets, scoring metrics, and regression tests",
       "version": "1.0.0"
+    },
+    {
+      "name": "vertical-research",
+      "source": "./plugins/vertical-research",
+      "description": "Run /research <niche> to evaluate whether building software for a vertical/niche makes sense — competitor map, quantified reviews with verbatim quotes, DataForSEO search demand, market sizing, build/moat, ranked risks — output as one sourced report.",
+      "version": "1.0.0"
     }
   ]
 }
